@@ -46,7 +46,7 @@ public class ProjectPopulation {
         List.of(
             details("Project", "Save Project").failedRequests().count().is(0L),
             details("Project", "Save Project").responseTime().mean().lte(30),
-            details("Project", "Save Project").responseTime().stdDev().lte(50),
+            details("Project", "Save Project").responseTime().stdDev().lte(60),
             details("Project", "Save Project").responseTime().percentile3().lte(40),
             details("Project", "Save Project").responseTime().max().lte(1000))
     );

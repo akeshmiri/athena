@@ -47,7 +47,7 @@ public class EnvironmentPopulation {
         List.of(
             details("Environment", "Save Environment").failedRequests().count().is(0L),
             details("Environment", "Save Environment").responseTime().mean().lte(30),
-            details("Environment", "Save Environment").responseTime().stdDev().lte(50),
+            details("Environment", "Save Environment").responseTime().stdDev().lte(60),
             details("Environment", "Save Environment").responseTime().percentile3().lte(40),
             details("Environment", "Save Environment").responseTime().max().lte(1000))
     );

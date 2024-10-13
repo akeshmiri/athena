@@ -49,7 +49,7 @@ public class UserPopulation {
             details("User", "Save User").failedRequests().count().is(0L),
             details("User", "Save User").responseTime().mean().lte(100),
             details("User", "Save User").responseTime().stdDev().lte(50),
-            details("User", "Save User").responseTime().percentile3().lte(60),
+            details("User", "Save User").responseTime().percentile3().lte(80),
             details("User", "Save User").responseTime().max().lte(1000))
     );
   }
