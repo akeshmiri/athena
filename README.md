@@ -26,7 +26,7 @@ security, and functional correctness.
 
 # Builds locally
 
-To build Athena locally you need ```maven 3.8.6+```, ```JDK-17```, ```docker``` and then simply install packages and run
+To build Athena locally you need ```maven 3.8.6+```, ```JDK-21```, ```docker``` and then simply install packages and run
 tests
 
 ```shell 

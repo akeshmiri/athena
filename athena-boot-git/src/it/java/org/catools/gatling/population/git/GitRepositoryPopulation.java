@@ -47,6 +47,7 @@ public class GitRepositoryPopulation {
         List.of(
             details("GitRepository", "Save GitRepository").failedRequests().count().is(0L),
             details("GitRepository", "Save GitRepository").responseTime().mean().lte(30),
+            details("GitRepository", "Save GitRepository").responseTime().stdDev().lte(40),
             details("GitRepository", "Save GitRepository").responseTime().percentile3().lte(40),
             details("GitRepository", "Save GitRepository").responseTime().max().lte(500)
         )
@@ -65,6 +66,7 @@ public class GitRepositoryPopulation {
         List.of(
             details("GitRepository", "Search GitRepository").failedRequests().count().is(0L),
             details("GitRepository", "Search GitRepository").responseTime().mean().lte(10),
+            details("GitRepository", "Search GitRepository").responseTime().stdDev().lte(5),
             details("GitRepository", "Search GitRepository").responseTime().percentile3().lte(15),
             details("GitRepository", "Search GitRepository").responseTime().max().lte(100))
     );

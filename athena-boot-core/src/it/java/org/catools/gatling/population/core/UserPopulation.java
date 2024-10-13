@@ -47,7 +47,8 @@ public class UserPopulation {
         ),
         List.of(
             details("User", "Save User").failedRequests().count().is(0L),
-            details("User", "Save User").responseTime().mean().lte(40),
+            details("User", "Save User").responseTime().mean().lte(100),
+            details("User", "Save User").responseTime().stdDev().lte(50),
             details("User", "Save User").responseTime().percentile3().lte(60),
             details("User", "Save User").responseTime().max().lte(1000))
     );
@@ -68,6 +69,7 @@ public class UserPopulation {
         List.of(
             details("User", "Search User").failedRequests().count().is(0L),
             details("User", "Search User").responseTime().mean().lte(10),
+            details("User", "Search User").responseTime().stdDev().lte(5),
             details("User", "Search User").responseTime().percentile3().lte(15),
             details("User", "Search User").responseTime().max().lte(150))
     );

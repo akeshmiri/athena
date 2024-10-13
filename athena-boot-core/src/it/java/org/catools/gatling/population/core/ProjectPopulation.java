@@ -46,6 +46,7 @@ public class ProjectPopulation {
         List.of(
             details("Project", "Save Project").failedRequests().count().is(0L),
             details("Project", "Save Project").responseTime().mean().lte(30),
+            details("Project", "Save Project").responseTime().stdDev().lte(50),
             details("Project", "Save Project").responseTime().percentile3().lte(40),
             details("Project", "Save Project").responseTime().max().lte(1000))
     );
@@ -66,6 +67,7 @@ public class ProjectPopulation {
         List.of(
             details("Project", "Search Project").failedRequests().count().is(0L),
             details("Project", "Search Project").responseTime().mean().lte(10),
+            details("Project", "Search Project").responseTime().stdDev().lte(5),
             details("Project", "Search Project").responseTime().percentile3().lte(15),
             details("Project", "Search Project").responseTime().max().lte(150))
     );

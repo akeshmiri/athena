@@ -1,0 +1,32 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: athena-boot-core
+          uri: http://localhost:8081
+          predicates:
+            - Path=/core/**
+        - id: athena-boot-git
+          uri: http://localhost:8082
+          predicates:
+            - Path=/git/**
+        - id: athena-boot-kube
+          uri: http://localhost:8083
+          predicates:
+            - Path=/kube/**
+        - id: athena-boot-metric
+          uri: http://localhost:8084
+          predicates:
+            - Path=/metric/**
+        - id: athena-boot-pipeline
+          uri: http://localhost:8085
+          predicates:
+            - Path=/pipeline/**
+        - id: athena-boot-spec
+          uri: http://localhost:8086
+          predicates:
+            - Path=/spec/**
+        - id: athena-boot-tms
+          uri: http://localhost:8087
+          predicates:
+            - Path=/tms/**

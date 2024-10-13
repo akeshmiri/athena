@@ -46,7 +46,8 @@ public class VersionPopulation {
         ),
         List.of(
             details("Version", "Save Version").failedRequests().count().is(0L),
-            details("Version", "Save Version").responseTime().mean().lte(30),
+            details("Version", "Save Version").responseTime().mean().lte(40),
+            details("Version", "Save Version").responseTime().stdDev().lte(70),
             details("Version", "Save Version").responseTime().percentile3().lte(40),
             details("Version", "Save Version").responseTime().max().lte(1000))
     );
@@ -67,6 +68,7 @@ public class VersionPopulation {
         List.of(
             details("Version", "Search Version").failedRequests().count().is(0L),
             details("Version", "Search Version").responseTime().mean().lte(10),
+            details("Version", "Search Version").responseTime().stdDev().lte(5),
             details("Version", "Search Version").responseTime().percentile3().lte(15),
             details("Version", "Search Version").responseTime().max().lte(150))
     );

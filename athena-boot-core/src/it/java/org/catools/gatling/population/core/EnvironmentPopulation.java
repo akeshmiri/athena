@@ -47,6 +47,7 @@ public class EnvironmentPopulation {
         List.of(
             details("Environment", "Save Environment").failedRequests().count().is(0L),
             details("Environment", "Save Environment").responseTime().mean().lte(30),
+            details("Environment", "Save Environment").responseTime().stdDev().lte(50),
             details("Environment", "Save Environment").responseTime().percentile3().lte(40),
             details("Environment", "Save Environment").responseTime().max().lte(1000))
     );
@@ -67,6 +68,7 @@ public class EnvironmentPopulation {
         List.of(
             details("Environment", "Search Environment").failedRequests().count().is(0L),
             details("Environment", "Search Environment").responseTime().mean().lte(10),
+            details("Environment", "Search Environment").responseTime().stdDev().lte(5),
             details("Environment", "Search Environment").responseTime().percentile3().lte(15),
             details("Environment", "Search Environment").responseTime().max().lte(150))
     );

@@ -31,6 +31,7 @@ public class AthenaTestConfig {
 
   private static final String POSTGRES = "postgres";
   private static final String SERVICE_NAME = "athena-core";
+  private static final int CORE_SERVICE_PORT = 8081;
 
   @Bean
   @ServiceConnection
@@ -39,7 +40,7 @@ public class AthenaTestConfig {
     Path projectRoot = Path.of(".").toAbsolutePath().getParent().getParent().toAbsolutePath();
     return new DockerComposeContainer<>(new File(projectRoot + "/docker/docker-compose.yml"))
         .withExposedService(POSTGRES, 5432)
-        .withExposedService(SERVICE_NAME, 8080)
+        .withExposedService(SERVICE_NAME, CORE_SERVICE_PORT)
         .waitingFor(POSTGRES, new LogMessageWaitStrategy()
             .withRegEx(".*database system is ready to accept connections.*")
             .withTimes(1)
@@ -96,6 +97,6 @@ public class AthenaTestConfig {
     return FeignBuilder.feignBuilder(apiType,
         JacksonUtil.objectMapper().disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES),
         athenaCore.getHost(),
-        athenaCore.getMappedPort(8080));
+        athenaCore.getMappedPort(CORE_SERVICE_PORT));
   }
 }
