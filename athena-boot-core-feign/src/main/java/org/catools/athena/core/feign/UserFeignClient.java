@@ -21,6 +21,10 @@ public interface UserFeignClient {
 
   @RequestLine("POST /user")
   @Headers("Content-Type: application/json")
-  TypedResponse<Void> saveOrUpdate(UserDto user);
+  TypedResponse<Void> save(UserDto user);
+
+  @RequestLine("PUT /user")
+  @Headers("Content-Type: application/json")
+  TypedResponse<Void> update(UserDto user);
 
 }

@@ -9,5 +9,7 @@ public interface ProjectService {
 
   Optional<ProjectDto> getById(Long id);
 
-  ProjectDto saveOrUpdate(ProjectDto entity);
+  ProjectDto save(ProjectDto entity);
+
+  ProjectDto update(ProjectDto entity);
 }

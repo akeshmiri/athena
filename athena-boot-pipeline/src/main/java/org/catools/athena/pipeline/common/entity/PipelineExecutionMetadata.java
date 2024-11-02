@@ -27,7 +27,7 @@ public class PipelineExecutionMetadata implements NameValuePair, Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(updatable = false, nullable = false)
+  @Column(unique = true, updatable = false, nullable = false)
   private Long id;
 
   @Column(name = "name", length = 100, nullable = false)

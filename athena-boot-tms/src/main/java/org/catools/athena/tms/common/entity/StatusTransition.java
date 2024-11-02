@@ -30,7 +30,7 @@ public class StatusTransition implements Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(updatable = false, nullable = false)
+  @Column(unique = true, updatable = false, nullable = false)
   private Long id;
 
   @Column(name = "occurred", columnDefinition = "TIMESTAMPTZ")

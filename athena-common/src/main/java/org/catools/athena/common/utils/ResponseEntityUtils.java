@@ -47,6 +47,20 @@ public class ResponseEntityUtils {
         .build();
   }
 
+  public static <T> ResponseEntity<T> updated(final String path, final Long id) {
+    return ResponseEntity
+        .status(HttpStatus.OK)
+        .location(getLocation(path, id))
+        .header(ENTITY_ID, String.valueOf(id))
+        .build();
+  }
+
+  public static ResponseEntity<Void> conflicted() {
+    return ResponseEntity
+        .status(HttpStatus.CONFLICT)
+        .build();
+  }
+
   public static Long getId(final URI location) {
     String[] parts = location.getPath().split("/");
     return Long.valueOf(parts[parts.length - 1]);

@@ -28,7 +28,7 @@ public class DiffEntry implements Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(updatable = false, nullable = false)
+  @Column(unique = true, updatable = false, nullable = false)
   private Long id;
 
   @ManyToOne(fetch = FetchType.LAZY)

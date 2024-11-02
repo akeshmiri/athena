@@ -9,5 +9,7 @@ public interface VersionService {
 
   Optional<VersionDto> getById(Long id);
 
-  VersionDto saveOrUpdate(VersionDto entity);
+  VersionDto save(VersionDto entity);
+
+  VersionDto update(VersionDto entity);
 }

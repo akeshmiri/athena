@@ -25,7 +25,7 @@ public class GitRepository implements Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(updatable = false, nullable = false)
+  @Column(unique = true, updatable = false, nullable = false)
   private Long id;
 
   @Column(name = "name", length = 200, unique = true, nullable = false)

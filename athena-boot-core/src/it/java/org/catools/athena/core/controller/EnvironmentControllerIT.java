@@ -28,10 +28,13 @@ class EnvironmentControllerIT extends CoreControllerIT {
 
   @Test
   @Order(2)
-  void saveShallNotSaveSameEnvironmentTwice() {
+  void saveShallNotSaveSameEntityTwice() {
     EnvironmentDto environmentDto = CoreBuilder.buildEnvironmentDto(project.getCode()).setCode(this.environmentDto.getCode());
     TypedResponse<Void> response = environmentFeignClient.save(environmentDto);
-    verifyEnvironment(response, environmentDto);
+    assertThat(response.status(), equalTo(208));
+    Long id = FeignUtils.getIdFromLocationHeader(response);
+    assertThat(id, equalTo(this.environmentDto.getId()));
+    assertThat(response.body(), nullValue());
   }
 
   @Test

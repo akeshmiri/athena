@@ -34,7 +34,7 @@ public class PipelineExecution implements Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(updatable = false, nullable = false)
+  @Column(unique = true, updatable = false, nullable = false)
   private Long id;
 
   @Column(name = "packageName", length = 300, nullable = false)

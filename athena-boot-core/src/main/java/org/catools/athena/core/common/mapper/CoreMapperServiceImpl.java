@@ -7,11 +7,9 @@ import org.catools.athena.core.common.entity.AppVersion;
 import org.catools.athena.core.common.entity.Environment;
 import org.catools.athena.core.common.entity.Project;
 import org.catools.athena.core.common.entity.User;
-import org.catools.athena.core.common.entity.UserAlias;
 import org.catools.athena.core.common.repository.AppVersionRepository;
 import org.catools.athena.core.common.repository.EnvironmentRepository;
 import org.catools.athena.core.common.repository.ProjectRepository;
-import org.catools.athena.core.common.repository.UserAliasRepository;
 import org.catools.athena.core.common.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +24,6 @@ public class CoreMapperServiceImpl implements CoreMapperService {
   private final EnvironmentRepository environmentRepository;
   private final ProjectRepository projectRepository;
   private final UserRepository userRepository;
-  private final UserAliasRepository userAliasRepository;
   private final AppVersionRepository appVersionRepository;
 
   @SuppressWarnings("notused")
@@ -45,7 +42,7 @@ public class CoreMapperServiceImpl implements CoreMapperService {
   @Override
   public User search(String keyword) {
     if (StringUtils.isBlank(keyword)) return null;
-    return userRepository.findByUsernameIgnoreCase(keyword).orElseGet(() -> userAliasRepository.findByAliasIgnoreCase(keyword).map(UserAlias::getUser).orElse(null));
+    return userRepository.findByKeywords(Set.of(keyword.toLowerCase())).orElse(null);
   }
 
   @Override

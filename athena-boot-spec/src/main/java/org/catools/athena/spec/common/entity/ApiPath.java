@@ -37,7 +37,7 @@ public class ApiPath implements Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(updatable = false, nullable = false)
+  @Column(unique = true, updatable = false, nullable = false)
   private Long id;
 
   @Column(name = "method", length = 10, nullable = false)

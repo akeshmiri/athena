@@ -9,5 +9,7 @@ public interface EnvironmentService {
 
   Optional<EnvironmentDto> getById(Long id);
 
-  EnvironmentDto saveOrUpdate(EnvironmentDto entity);
+  EnvironmentDto save(EnvironmentDto entity);
+
+  EnvironmentDto update(EnvironmentDto entity);
 }

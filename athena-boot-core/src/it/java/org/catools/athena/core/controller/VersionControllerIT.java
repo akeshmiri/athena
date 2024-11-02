@@ -29,9 +29,13 @@ class VersionControllerIT extends CoreControllerIT {
 
   @Test
   @Order(2)
-  void saveShallNotSaveSameVersionTwice() {
-    TypedResponse<Void> response = versionFeignClient.save(versionDto);
-    verifyVersion(response, 208, versionDto);
+  void saveShallNotSaveSameEntityTwice() {
+    VersionDto version1 = new VersionDto().setCode(versionDto.getCode()).setName(versionDto.getName()).setProject(versionDto.getProject());
+    TypedResponse<Void> response = versionFeignClient.save(version1);
+    assertThat(response.status(), equalTo(208));
+    Long id = FeignUtils.getIdFromLocationHeader(response);
+    assertThat(id, equalTo(versionDto.getId()));
+    assertThat(response.body(), nullValue());
   }
 
   @Test

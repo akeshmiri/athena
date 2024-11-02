@@ -42,14 +42,14 @@ class CoreMapperIT extends AthenaSpringBootIT {
   @BeforeAll
   public void beforeAll() {
     UserDto userDto = CoreBuilder.buildUserDto();
-    userDto.setId(athenaCoreService.saveOrUpdate(userDto).getId());
+    userDto.setId(athenaCoreService.save(userDto).getId());
 
     projectDto = CoreBuilder.buildProjectDto();
-    projectDto.setId(projectService.saveOrUpdate(projectDto).getId());
+    projectDto.setId(projectService.save(projectDto).getId());
     project = CoreBuilder.buildProject(projectDto);
 
     environmentDto = CoreBuilder.buildEnvironmentDto(projectDto.getCode());
-    environmentDto.setId(environmentService.saveOrUpdate(environmentDto).getId());
+    environmentDto.setId(environmentService.save(environmentDto).getId());
     environment = CoreBuilder.buildEnvironment(environmentDto, project);
   }
 

@@ -23,4 +23,8 @@ public interface EnvironmentFeignClient {
   @Headers("Content-Type: application/json")
   TypedResponse<Void> save(EnvironmentDto environment);
 
+  @RequestLine("PUT /environment")
+  @Headers("Content-Type: application/json")
+  TypedResponse<Void> update(EnvironmentDto environment);
+
 }

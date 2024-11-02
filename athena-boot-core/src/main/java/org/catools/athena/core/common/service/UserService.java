@@ -11,5 +11,7 @@ public interface UserService {
 
   Optional<UserDto> search(String keyword);
 
-  UserDto saveOrUpdate(UserDto entity);
+  UserDto save(UserDto entity);
+
+  UserDto update(UserDto entity);
 }

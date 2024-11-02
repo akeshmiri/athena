@@ -21,18 +21,18 @@ class ProjectControllerIT extends CoreControllerIT {
   @Order(1)
   void saveShouldSaveProjectWhenValidDataProvided() {
     ProjectDto projectDto = CoreBuilder.buildProjectDto();
-    TypedResponse<Void> response = projectFeignClient.saveOrUpdate(projectDto);
+    TypedResponse<Void> response = projectFeignClient.save(projectDto);
     verifyProject(response, projectDto);
   }
 
   @Test
   @Order(10)
-  void saveShouldUpdateProjectIfProjectWithTheSameCodeAlreadyExists() {
-    ProjectDto projectDto = CoreBuilder.buildProjectDto().setCode(project.getCode());
-    TypedResponse<Void> response = projectFeignClient.saveOrUpdate(projectDto);
-    assertThat(response.status(), equalTo(201));
+  void saveShallNotSaveSameEntityTwice() {
+    ProjectDto projectDto = CoreBuilder.buildProjectDto().setCode(project.getCode()).setName(project.getName());
+    TypedResponse<Void> response = projectFeignClient.save(projectDto);
+    assertThat(response.status(), equalTo(208));
     Long id = FeignUtils.getIdFromLocationHeader(response);
-    assertThat(id, equalTo(1L));
+    assertThat(id, equalTo(project.getId()));
     assertThat(response.body(), nullValue());
   }
 

@@ -6,16 +6,20 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.catools.athena.common.controlleradvice.ControllerErrorHandler;
+import org.catools.athena.common.markers.IdRequired;
 import org.catools.athena.common.utils.ResponseEntityUtils;
 import org.catools.athena.core.common.service.VersionService;
 import org.catools.athena.core.model.VersionDto;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.context.annotation.Import;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -69,20 +73,40 @@ public class VersionController {
       summary = "Save version or update the current one if any with the same code exists",
       responses = {
           @ApiResponse(responseCode = "201", description = "Version is created"),
-          @ApiResponse(responseCode = "208", description = "Version is already exists"),
-          @ApiResponse(responseCode = "400", description = "Failed to process request")
+          @ApiResponse(responseCode = "208", description = "Version already exists"),
+          @ApiResponse(responseCode = "400", description = "Failed to process request"),
+          @ApiResponse(responseCode = "409", description = "Version already exists")
       })
   public ResponseEntity<Void> save(
       @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "The version to save or update")
       @Validated @RequestBody final VersionDto version
   ) {
-    final Optional<VersionDto> versionFromDb = versionService.search(version.getCode());
-
-    if (versionFromDb.isPresent()) {
-      return ResponseEntityUtils.alreadyReported(VERSION, versionFromDb.get().getId());
+    try {
+      final VersionDto savedVersionDto = versionService.save(version);
+      return ResponseEntityUtils.created(VERSION, savedVersionDto.getId());
+    } catch (DataIntegrityViolationException ex) {
+      if (ex.getCause() instanceof ConstraintViolationException) {
+        Optional<VersionDto> dbRecord = versionService.search(version.getCode());
+        if (dbRecord.isPresent())
+          return ResponseEntityUtils.alreadyReported(VERSION, dbRecord.get().getId());
+      }
+      return ResponseEntityUtils.conflicted();
     }
+  }
 
-    final VersionDto savedVersionDto = versionService.saveOrUpdate(version);
+  @PutMapping
+  @Operation(
+      summary = "Save version or update the current one if any with the same code exists",
+      responses = {
+          @ApiResponse(responseCode = "201", description = "Version is created"),
+          @ApiResponse(responseCode = "208", description = "Version is already exists"),
+          @ApiResponse(responseCode = "400", description = "Failed to process request")
+      })
+  public ResponseEntity<Void> update(
+      @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "The version to save or update")
+      @Validated(IdRequired.class) @RequestBody final VersionDto version
+  ) {
+    final VersionDto savedVersionDto = versionService.update(version);
     return ResponseEntityUtils.created(VERSION, savedVersionDto.getId());
   }
 }

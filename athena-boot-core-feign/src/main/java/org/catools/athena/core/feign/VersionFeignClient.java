@@ -23,4 +23,8 @@ public interface VersionFeignClient {
   @Headers("Content-Type: application/json")
   TypedResponse<Void> save(VersionDto version);
 
+  @RequestLine("PUT /version")
+  @Headers("Content-Type: application/json")
+  TypedResponse<Void> update(VersionDto version);
+
 }

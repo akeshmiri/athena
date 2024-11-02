@@ -13,6 +13,7 @@ import org.junit.jupiter.api.TestMethodOrder;
 
 import java.util.Optional;
 
+import static org.catools.athena.common.utils.ResponseEntityUtils.ENTITY_ID;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
@@ -26,28 +27,28 @@ class UserControllerIT extends CoreControllerIT {
   @Order(1)
   void saveShouldSaveUserIfAllFieldsAreProvided() {
     UserDto userDto = CoreBuilder.buildUserDto();
-    TypedResponse<Void> response = userFeignClient.saveOrUpdate(userDto);
+    TypedResponse<Void> response = userFeignClient.save(userDto);
     verifyUser(response, userDto);
   }
 
   @Test
   @Order(12)
-  void saveShallUpdateUserIfRecordWithTheSameUsernameExists() {
+  void updateShallUpdateUserIfRecordWithTheSameUsernameExists() {
     UserDto user1Dto = CoreBuilder.buildUserDto();
-    userFeignClient.saveOrUpdate(user1Dto);
+    TypedResponse<Void> saved = userFeignClient.save(user1Dto);
 
-    UserDto user2Dto = CoreBuilder.buildUserDto().setUsername(user1Dto.getUsername());
-    TypedResponse<Void> response = userFeignClient.saveOrUpdate(user2Dto);
+    UserDto user2Dto = CoreBuilder.buildUserDto().setId(Long.valueOf(saved.headers().get(ENTITY_ID).stream().findFirst().get())).setUsername(user1Dto.getUsername());
+    TypedResponse<Void> response = userFeignClient.update(user2Dto);
     user2Dto.getAliases().addAll(user1Dto.getAliases());
     verifyUser(response, user2Dto);
   }
 
   @Test
   @Order(13)
-  void saveShallUpdateUserIfRecordWithTheSameAliasExists() {
+  void updateShallUpdateUserIfRecordWithTheSameAliasExists() {
     UserDto userDto = CoreBuilder.buildUserDto();
     userDto.getAliases().add(this.userDto.getAliases().stream().findAny().orElseThrow());
-    TypedResponse<Void> response = userFeignClient.saveOrUpdate(userDto);
+    TypedResponse<Void> response = userFeignClient.update(userDto.setId(this.userDto.getId()));
     userDto.getAliases().addAll(this.userDto.getAliases());
     userDto.setUsername(this.userDto.getUsername());
     verifyUser(response, userDto);

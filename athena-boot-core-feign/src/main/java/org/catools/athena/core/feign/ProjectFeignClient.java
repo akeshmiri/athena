@@ -21,6 +21,10 @@ public interface ProjectFeignClient {
 
   @RequestLine("POST /project")
   @Headers("Content-Type: application/json")
-  TypedResponse<Void> saveOrUpdate(ProjectDto project);
+  TypedResponse<Void> save(ProjectDto project);
+
+  @RequestLine("PUT /project")
+  @Headers("Content-Type: application/json")
+  TypedResponse<Void> update(ProjectDto project);
 
 }

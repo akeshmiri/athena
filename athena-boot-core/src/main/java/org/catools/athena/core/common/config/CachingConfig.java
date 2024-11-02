@@ -15,10 +15,10 @@ public class CachingConfig {
 
   @Bean
   public CacheManager cacheManager() {
-    return new ConcurrentMapCacheManager("userByUsername", "projectByCode");
+    return new ConcurrentMapCacheManager("userByUsername", "userByUsernameOrAlias", "projectByCode");
   }
 
-  @CacheEvict(value = {"userByUsername", "projectByCode"}, allEntries = true)
+  @CacheEvict(value = {"userByUsername", "userByUsernameOrAlias", "projectByCode"}, allEntries = true)
   @Scheduled(fixedRate = 60 * 1000)
   public void emptyCache() {
     // this is a scheduled timer to clean up caches
