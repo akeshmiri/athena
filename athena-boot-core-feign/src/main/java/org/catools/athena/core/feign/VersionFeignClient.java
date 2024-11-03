@@ -8,7 +8,7 @@ import org.catools.athena.core.model.VersionDto;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cloud.openfeign.FeignClient;
 
-@FeignClient(value = "versionFeignClient")
+@FeignClient(value = "versionFeignClient", url = "${feign.clients.core.url}")
 public interface VersionFeignClient {
 
   @RequestLine("GET /version?keyword={keyword}")

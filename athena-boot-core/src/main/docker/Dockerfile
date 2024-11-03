@@ -12,6 +12,7 @@ FROM openjdk:21-jdk-slim
 ENV DB_PSQL_URL="jdbc:postgresql://localhost:5432/postgres" \
     DB_PSQL_USERNAME="postgres" \
     DB_PSQL_PASSWORD="password" \
+    ACTIVE_PROFILE="prod" \
     application="/opt/athena"
 
 WORKDIR $application
@@ -31,4 +32,5 @@ ENTRYPOINT ["java", \
 "-Dspring.datasource.url=${DB_PSQL_URL}", \
 "-Dspring.datasource.username=${DB_PSQL_USERNAME}", \
 "-Dspring.datasource.password=${DB_PSQL_PASSWORD}", \
+"-Dspring.profiles.active=${ACTIVE_PROFILE}", \
 "org.springframework.boot.loader.launch.JarLauncher"]

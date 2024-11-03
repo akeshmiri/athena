@@ -8,7 +8,7 @@ import org.catools.athena.core.model.EnvironmentDto;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cloud.openfeign.FeignClient;
 
-@FeignClient(value = "environmentFeignClient")
+@FeignClient(value = "environmentFeignClient", url = "${feign.clients.core.url}")
 public interface EnvironmentFeignClient {
 
   @RequestLine("GET /environment?keyword={keyword}")

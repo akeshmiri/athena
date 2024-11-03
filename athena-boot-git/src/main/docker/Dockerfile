@@ -12,6 +12,8 @@ FROM openjdk:21-jdk-slim
 ENV DB_PSQL_URL="jdbc:postgresql://localhost:54321/postgres" \
     DB_PSQL_USERNAME="postgres" \
     DB_PSQL_PASSWORD="password" \
+    ACTIVE_PROFILE="prod" \
+    FEIGN_CLIENT_CORE_URL="http://athena-core:8081" \
     application="/opt/athena"
 
 WORKDIR $application
@@ -30,4 +32,6 @@ ENTRYPOINT ["java", \
 "-Dspring.datasource.url=${DB_PSQL_URL}", \
 "-Dspring.datasource.username=${DB_PSQL_USERNAME}", \
 "-Dspring.datasource.password=${DB_PSQL_PASSWORD}", \
+"-Dspring.profiles.active=${ACTIVE_PROFILE}", \
+"-Dfeign.clients.core.url=${FEIGN_CLIENT_CORE_URL}", \
 "org.springframework.boot.loader.launch.JarLauncher"]
