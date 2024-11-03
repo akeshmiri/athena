@@ -8,7 +8,7 @@ import org.catools.athena.core.model.UserDto;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cloud.openfeign.FeignClient;
 
-@FeignClient(value = "userFeignClient")
+@FeignClient(value = "userFeignClient", url = "${feign.clients.core.url}")
 public interface UserFeignClient {
 
   @RequestLine("GET /user?keyword={keyword}")

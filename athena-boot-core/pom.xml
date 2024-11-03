@@ -15,8 +15,11 @@
     <name>Athena Core Api</name>
     <description>Rest services to manage core Athena business entities.</description>
 
-    <dependencies>
+    <properties>
+        <docker.skip>false</docker.skip>
+    </properties>
 
+    <dependencies>
         <dependency>
             <groupId>org.catools</groupId>
             <artifactId>athena-common-test</artifactId>

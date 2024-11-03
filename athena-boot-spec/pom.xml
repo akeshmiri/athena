@@ -15,8 +15,11 @@
     <name>Athena Specification Api</name>
     <description>Rest services to manage Api Specification data.</description>
 
-    <dependencies>
+    <properties>
+        <docker.skip>false</docker.skip>
+    </properties>
 
+    <dependencies>
         <dependency>
             <groupId>org.catools</groupId>
             <artifactId>athena-boot-core-feign</artifactId>
@@ -57,7 +60,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>org.catools.athena.core.AthenaCoreApplication</mainClass>
+                    <mainClass>org.catools.athena.spec.AthenaSpecApplication</mainClass>
                 </configuration>
             </plugin>
         </plugins>

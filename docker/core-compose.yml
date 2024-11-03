@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: akeshmiri/athena-pg-demo:0.2
+    environment:
+      POSTGRES_PASSWORD: "password"
+    ports:
+      - "5432:5432"
+    networks:
+      - athena-network
+
+  athena-core:
+    image: akeshmiri/athena-boot-core:latest
+    pull_policy: never
+    depends_on:
+      - postgres
+    environment:
+      DB_PSQL_URL: "jdbc:postgresql://postgres:5432/athena"
+    ports:
+      - "8081:8080"
+    networks:
+      - athena-network
+
+networks:
+  athena-network:

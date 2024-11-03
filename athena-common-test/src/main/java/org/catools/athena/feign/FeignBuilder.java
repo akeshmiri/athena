@@ -1,4 +1,4 @@
-package org.catools.athena.common.feign;
+package org.catools.athena.feign;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import feign.Feign;

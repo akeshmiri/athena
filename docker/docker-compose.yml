@@ -22,5 +22,77 @@ services:
     networks:
       - athena-network
 
+  athena-git:
+    image: akeshmiri/athena-boot-git:latest
+    pull_policy: never
+    depends_on:
+      - postgres
+    environment:
+      DB_PSQL_URL: "jdbc:postgresql://postgres:5432/athena"
+    ports:
+      - "8082:8080"
+    networks:
+      - athena-network
+
+  athena-kube:
+    image: akeshmiri/athena-boot-kube:latest
+    pull_policy: never
+    depends_on:
+      - postgres
+    environment:
+      DB_PSQL_URL: "jdbc:postgresql://postgres:5432/athena"
+    ports:
+      - "8083:8080"
+    networks:
+      - athena-network
+
+  athena-metric:
+    image: akeshmiri/athena-boot-metric:latest
+    pull_policy: never
+    depends_on:
+      - postgres
+    environment:
+      DB_PSQL_URL: "jdbc:postgresql://postgres:5432/athena"
+    ports:
+      - "8084:8080"
+    networks:
+      - athena-network
+
+  athena-pipeline:
+    image: akeshmiri/athena-boot-pipeline:latest
+    pull_policy: never
+    depends_on:
+      - postgres
+    environment:
+      DB_PSQL_URL: "jdbc:postgresql://postgres:5432/athena"
+    ports:
+      - "8085:8080"
+    networks:
+      - athena-network
+
+  athena-spec:
+    image: akeshmiri/athena-boot-spec:latest
+    pull_policy: never
+    depends_on:
+      - postgres
+    environment:
+      DB_PSQL_URL: "jdbc:postgresql://postgres:5432/athena"
+    ports:
+      - "8086:8080"
+    networks:
+      - athena-network
+
+  athena-tms:
+    image: akeshmiri/athena-boot-tms:latest
+    pull_policy: never
+    depends_on:
+      - postgres
+    environment:
+      DB_PSQL_URL: "jdbc:postgresql://postgres:5432/athena"
+    ports:
+      - "8087:8080"
+    networks:
+      - athena-network
+
 networks:
   athena-network:

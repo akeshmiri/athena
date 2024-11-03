@@ -2,12 +2,12 @@ package org.catools.athena;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.zaxxer.hikari.HikariDataSource;
-import org.catools.athena.common.feign.FeignBuilder;
 import org.catools.athena.common.utils.JacksonUtil;
 import org.catools.athena.core.feign.EnvironmentFeignClient;
 import org.catools.athena.core.feign.ProjectFeignClient;
 import org.catools.athena.core.feign.UserFeignClient;
 import org.catools.athena.core.feign.VersionFeignClient;
+import org.catools.athena.feign.FeignBuilder;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -38,7 +38,7 @@ public class AthenaTestConfig {
   @SuppressWarnings("all")
   public DockerComposeContainer<?> athenaApi() {
     Path projectRoot = Path.of(".").toAbsolutePath().getParent().getParent().toAbsolutePath();
-    return new DockerComposeContainer<>(new File(projectRoot + "/docker/docker-compose.yml"))
+    return new DockerComposeContainer<>(new File(projectRoot + "/docker/core-compose.yml"))
         .withExposedService(POSTGRES, 5432)
         .withExposedService(SERVICE_NAME, CORE_SERVICE_PORT)
         .waitingFor(POSTGRES, new LogMessageWaitStrategy()
