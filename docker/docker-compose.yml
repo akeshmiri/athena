@@ -18,7 +18,7 @@ services:
     environment:
       DB_PSQL_URL: "jdbc:postgresql://postgres:5432/athena"
     ports:
-      - "8081:8080"
+      - "8081:8081"
     networks:
       - athena-network
 
@@ -30,7 +30,7 @@ services:
     environment:
       DB_PSQL_URL: "jdbc:postgresql://postgres:5432/athena"
     ports:
-      - "8082:8080"
+      - "8082:8082"
     networks:
       - athena-network
 
@@ -42,7 +42,7 @@ services:
     environment:
       DB_PSQL_URL: "jdbc:postgresql://postgres:5432/athena"
     ports:
-      - "8083:8080"
+      - "8083:8083"
     networks:
       - athena-network
 
@@ -54,7 +54,7 @@ services:
     environment:
       DB_PSQL_URL: "jdbc:postgresql://postgres:5432/athena"
     ports:
-      - "8084:8080"
+      - "8084:8084"
     networks:
       - athena-network
 
@@ -66,7 +66,7 @@ services:
     environment:
       DB_PSQL_URL: "jdbc:postgresql://postgres:5432/athena"
     ports:
-      - "8085:8080"
+      - "8085:8085"
     networks:
       - athena-network
 
@@ -78,7 +78,7 @@ services:
     environment:
       DB_PSQL_URL: "jdbc:postgresql://postgres:5432/athena"
     ports:
-      - "8086:8080"
+      - "8086:8086"
     networks:
       - athena-network
 
@@ -90,7 +90,7 @@ services:
     environment:
       DB_PSQL_URL: "jdbc:postgresql://postgres:5432/athena"
     ports:
-      - "8087:8080"
+      - "8087:8087"
     networks:
       - athena-network
 
