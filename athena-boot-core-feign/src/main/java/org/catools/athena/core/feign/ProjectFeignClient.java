@@ -8,7 +8,7 @@ import org.catools.athena.core.model.ProjectDto;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cloud.openfeign.FeignClient;
 
-@FeignClient(value = "projectFeignClient", url = "${feign.clients.core.url}")
+@FeignClient(value = "projectFeignClient", url = "${feign.clients.athena.core.url}")
 public interface ProjectFeignClient {
 
   @RequestLine("GET /project?keyword={keyword}")

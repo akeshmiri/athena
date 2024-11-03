@@ -94,6 +94,10 @@ public class AthenaTestConfig {
   public <T> T coreFeignBuilder(DockerComposeContainer<?> athenaApi, Class<T> apiType) {
     ContainerState athenaCore = athenaApi.getContainerByServiceName(SERVICE_NAME).orElseThrow();
 
+    // for profiles where client defined url as annotation
+    System.setProperty("feign.clients.athena.core.url", "http://%s:%s".formatted(athenaCore.getHost(), athenaCore.getMappedPort(CORE_SERVICE_PORT)));
+
+    // for profiles where client defines programmatically
     return FeignBuilder.feignBuilder(apiType,
         JacksonUtil.objectMapper().disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES),
         athenaCore.getHost(),

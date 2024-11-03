@@ -33,5 +33,5 @@ ENTRYPOINT ["java", \
 "-Dspring.datasource.username=${DB_PSQL_USERNAME}", \
 "-Dspring.datasource.password=${DB_PSQL_PASSWORD}", \
 "-Dspring.profiles.active=${ACTIVE_PROFILE}", \
-"-Dfeign.clients.core.url=${FEIGN_CLIENT_CORE_URL}", \
+"-Dfeign.clients.athena.core.url=${FEIGN_CLIENT_CORE_URL}", \
 "org.springframework.boot.loader.launch.JarLauncher"]

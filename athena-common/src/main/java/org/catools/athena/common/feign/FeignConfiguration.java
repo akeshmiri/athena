@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Profile;
 
 @Configuration
 @EnableFeignClients(basePackages = "org.catools.athena")
-@Profile("!test")
+@Profile({"prod", "dev"})
 public class FeignConfiguration {
   @Bean
   @SuppressWarnings("unused")
